@@ -1,4 +1,4 @@
-# docway.poc
+# Docway PoC - Identity Server - Refresh Token
 PoC uso do Identity Server com Refresh Token - Docway
 
 Esta Prova de Conceito é composta por três projetos desenvolvidos em .Net Core</br>
