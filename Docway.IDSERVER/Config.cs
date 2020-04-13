@@ -64,7 +64,9 @@ namespace Docway.IDSERVER
                     ClientId = "mvc1",
                     ClientName = "Minha MVC App 1",
 
+                    //AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
                     AllowAccessTokensViaBrowser = true,
                     
                     RequireConsent = false,

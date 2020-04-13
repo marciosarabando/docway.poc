@@ -24,9 +24,22 @@ namespace Docway.MVC.Controllers
         {
             return View();
         }
+        
         [Authorize]
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Token()
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
+            //return "Token: " + accessToken + "<br>" + "Refresh_Token: " + refreshToken;
+            ViewBag.Token = accessToken;
+            ViewBag.Refresh_Token = refreshToken;
+
             return View();
         }
 
