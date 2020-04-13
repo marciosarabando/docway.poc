@@ -30,12 +30,19 @@ namespace Docway.MVC
             .AddCookie("cookies")
             .AddOpenIdConnect("oidc", options => {
                 options.SignInScheme = "cookies";
-                options.RequireHttpsMetadata = false;
+                
                 options.Authority = "http://localhost:5000";
+                options.RequireHttpsMetadata = false;
+                
                 options.ClientId = "mvc1";
-                options.ResponseType = "token id_token";
+                options.ClientSecret = "segredo";
+                options.ResponseType = "code id_token token";
+                
                 options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+                
                 options.Scope.Add("mvc1");
+                options.Scope.Add("offline_access");
             });
 
             services.AddControllersWithViews();

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
@@ -34,7 +35,7 @@ namespace Docway.IDSERVER
                     ClientId = "api1",
                     ClientName = "Minha API 1",
 
-                    AllowedGrantTypes = GrantTypes.ImplicitAndClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowAccessTokensViaBrowser = true,
 
                     RequireConsent = false,
@@ -47,8 +48,15 @@ namespace Docway.IDSERVER
                     { 
                         "api1",
                         "openid",
-                        "profile"
-                    }
+                        "profile",
+                        "offline_access"
+                    },
+                    
+                    //Refresh Token Settings
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    SlidingRefreshTokenLifetime = 60 * 60 * 24 * 365
                 },
 
                 new Client
@@ -56,40 +64,30 @@ namespace Docway.IDSERVER
                     ClientId = "mvc1",
                     ClientName = "Minha MVC App 1",
 
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
                     AllowAccessTokensViaBrowser = true,
-
+                    
                     RequireConsent = false,
 
-                    RedirectUris = { "http://localhost:5001/signin-oidc" },
+                    ClientSecrets = { new Secret("segredo".Sha256()) },
 
-                    PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
+                    RedirectUris = {
+                        "http://localhost:5001/signin-oidc",
+                    },
+                    //LogoutUri = "http://localhost:9020/signout-oidc",
+                    PostLogoutRedirectUris =
+                    {
+                        "http://localhost:5001/signout-callback-oidc"
+                    },
 
-                    AllowedScopes =
-                    { 
-                        "mvc1",
-                        "openid",
-                        "profile"
-                    }
-                },
+                    AllowedScopes = { "openid", "profile", "mvc1", "offline_access" },
 
-                // MVC client using code flow + pkce
-                new Client
-                {
-                    ClientId = "mvc",
-                    ClientName = "MVC Client",
-
-                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-                    RequirePkce = true,
-                    ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
-                    RedirectUris = { "http://localhost:5003/signin-oidc" },
-                    FrontChannelLogoutUri = "http://localhost:5003/signout-oidc",
-                    PostLogoutRedirectUris = { "http://localhost:5003/signout-callback-oidc" },
-
+                    //Refresh Token Settings
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "api1" }
-                },
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    SlidingRefreshTokenLifetime = 60 * 60 * 24 * 365
+                }
 
             };
     }
