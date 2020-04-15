@@ -29,7 +29,7 @@ namespace Docway.API1
                     .AddIdentityServerAuthentication(options => {
                         options.Authority = "http://localhost:5000";
                         options.RequireHttpsMetadata = false;
-                        options.ApiName = "api1";
+                        options.ApiName = "mvc1";
                     });
             services.AddControllers();
         }

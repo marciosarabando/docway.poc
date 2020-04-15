@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,7 @@ namespace Docway.API1.Controllers
             //return new string[] { "Dr. Drauzio", "Dr. Dayan Siebra", "Dr. Barakat"};
             return medicos;
         }
+
     }
 
     public class Medicos

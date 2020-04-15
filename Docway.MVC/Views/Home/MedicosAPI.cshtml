@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Lista de médicos obtida da API";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<br>
+@{
+    if(ViewBag.medicos != null)
+    {
+        for (int i = 0; i < ViewBag.medicos.Count; i++)
+        {
+            <p>@ViewBag.medicos[i].Id - @ViewBag.medicos[i].Nome - @ViewBag.medicos[i].Especialidade</p>
+        }
+    }
+    else
+    {
+        <p>Token Expirado</p>
+    }
+}
