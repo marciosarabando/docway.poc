@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authentication;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Docway.MVC.Controllers
 {
@@ -59,7 +61,7 @@ namespace Docway.MVC.Controllers
             var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
 
             HttpClient cliente = new HttpClient();
-            cliente.BaseAddress = new Uri("http://localhost:5002/medicos");
+            cliente.BaseAddress = new Uri("http://localhost:5002");
 
             cliente.DefaultRequestHeaders.Accept.Add(
                 new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")
@@ -92,8 +94,62 @@ namespace Docway.MVC.Controllers
             {
                 ViewBag.medicos = null;
             }
-            
+            //getTokenByRefreshToken();
+            //getToken();
             return View();
+        }
+
+        public async void getToken()
+        {
+            var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
+
+            HttpClient client = new HttpClient();
+
+            client.BaseAddress = new Uri("http://localhost:5000/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+            /*
+            var parametro = new
+            {
+                client_id = "mvc1",
+                client_secret = "segredo",
+                grant_type = "refresh_token",
+                refresh_token = refreshToken
+            };*/
+
+            var KeyValues = new List<KeyValuePair<string,string>>();
+            KeyValues.Add(new KeyValuePair<string, string>("client_id","mvc1"));
+            KeyValues.Add(new KeyValuePair<string, string>("client_secret","segredo"));
+            KeyValues.Add(new KeyValuePair<string, string>("grant_type","refresh_token"));
+            KeyValues.Add(new KeyValuePair<string, string>("refresh_token",refreshToken));
+
+            //var jsonContent = JsonConvert.SerializeObject(parametro); 
+            //var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+            var contentString = new FormUrlEncodedContent(KeyValues);
+            
+            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded"); 
+            //contentString.Headers.Add("Session-Token", session_token); 
+
+            //Console.WriteLine(parametro);
+
+            HttpResponseMessage response = await client.PostAsync("connect/token", contentString);
+
+            Console.WriteLine(response);
+
+            var dados = string.Empty;
+            var token = new Token();
+            
+            if(response.IsSuccessStatusCode)
+            {
+                dados = await response.Content.ReadAsStringAsync();
+                token = JsonConvert.DeserializeObject<Token>(dados);
+            }
+
+            Console.WriteLine(token.Access_token);
+            
         }
 
         

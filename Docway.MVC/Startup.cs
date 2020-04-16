@@ -24,12 +24,16 @@ namespace Docway.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(options => {
-                options.DefaultScheme = "cookies";
+                options.DefaultScheme = "cookie_mvc";
                 options.DefaultChallengeScheme = "oidc";
             })
-            .AddCookie("cookies")
+            .AddCookie("cookie_mvc", options =>
+            {
+                // Set cookie to expire in X minutes.
+                options.ExpireTimeSpan = System.TimeSpan.FromMinutes(1);
+            })
             .AddOpenIdConnect("oidc", options => {
-                options.SignInScheme = "cookies";
+                options.SignInScheme = "cookie_mvc";
                 
                 options.Authority = "http://localhost:5000";
                 options.RequireHttpsMetadata = false;
