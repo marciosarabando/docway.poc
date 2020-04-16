@@ -50,7 +50,7 @@ namespace Docway.MVC.Controllers
 
         public async Task Logout()
         {
-            await HttpContext.SignOutAsync("cookies");
+            await HttpContext.SignOutAsync("cookie_mvc_docway");
             await HttpContext.SignOutAsync("oidc");
         }
 
