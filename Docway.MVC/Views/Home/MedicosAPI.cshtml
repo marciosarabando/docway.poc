@@ -8,13 +8,27 @@
 @{
     if(ViewBag.medicos != null)
     {
-        for (int i = 0; i < ViewBag.medicos.Count; i++)
-        {
-            <p>@ViewBag.medicos[i].Id - @ViewBag.medicos[i].Nome - @ViewBag.medicos[i].Especialidade</p>
-        }
+        @Html.Raw("<table class='table'>");
+        @Html.Raw("<thead>");
+        @Html.Raw("<th>ID</th>");
+        @Html.Raw("<th>MÉDICO</th>");
+        @Html.Raw("<th>ESPECIALIDADE</th>");
+        @Html.Raw("</thead>");
+        @Html.Raw("<tbody>");
+            
+                for (int i = 0; i < ViewBag.medicos.Count; i++)
+                {
+                    <tr>
+                        <td>@ViewBag.medicos[i].Id</td>
+                        <td>@ViewBag.medicos[i].Nome</td>
+                        <td>@ViewBag.medicos[i].Especialidade</td>
+                    </tr>
+                }
+        @Html.Raw("</tbody>");
+        @Html.Raw("</table>");
     }
     else
     {
-        <p>Token Expirado</p>
+        <p>401 - Não autorizado! Acesso Expirado.</p>
     }
 }
