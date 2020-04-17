@@ -54,7 +54,6 @@ namespace Docway.MVC.Controllers
             await HttpContext.SignOutAsync("oidc");
         }
 
-        //[HttpGet("medicos")]
         public async Task<IActionResult> MedicosAPI()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
