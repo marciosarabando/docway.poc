@@ -51,8 +51,7 @@ dotnet run
 <li><b><font style=color:green>Usuário:</font></b> 	após 1 minuto de inatividade clica em "Mostrar Médicos API"<br>
 <li><b><font style=color:purple>App:</font></b>	 	exibe a mensagem: "401 - Não autorizado! Acesso Expirado."
 <br><br><br>
-5.4 - USUÁRIO AUTENTICADO COM COOKIE EXPIRADO 
-<p>(A mágica do Refresh Token)
+5.4 - USUÁRIO AUTENTICADO COM COOKIE EXPIRADO (Refresh Token)
 <li><b><font style=color:green>Usuário:</font></b> 	clica em "Mostrar Token".<br>
 <li><b><font style=color:purple>App:</font></b>	 	identifica que o cookie expirou, chama o Identity Server, revalida o token e retorna para a tela do MVC que exibindo o novo Token e Refresh Token.
 
