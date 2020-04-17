@@ -56,7 +56,7 @@ dotnet run
 <li><b><font style=color:purple>App:</font></b>	 	identifica que o cookie expirou, chama o Identity Server, revalida o token e retorna para a tela do MVC que exibindo o novo Token e Refresh Token.
 
 ### 6. CONCLUSÃO
-Nesta PoC podemos verificar que apesar do Token estar dentro da validade padrão de 1 hora ele expira por causa do cookie estar ajustado para expirar com 1 (um) minuto de inatividade (veja a linha 33 da Startup.cs do projeto Docway.MVC).	Portanto, é recomendável que o tempo de expiração do cookie seja ajustado para um tempo maior do que o tempo de expiração do Token, para evitar que a app MVC não consiga pegar o token no cookie para realizar chamadas nas APIs usando o token válido, como fazemos na linha 59 da HomeController.cs do projeto MVC.
+Nesta PoC verificamos que apesar do Token estar dentro da validade padrão de 1 hora ele expira por causa do cookie estar ajustado para expirar com 1 (um) minuto de inatividade (veja a linha 33 da Startup.cs do projeto Docway.MVC).	Portanto, é recomendável que o tempo de expiração do cookie seja ajustado para um tempo maior do que o tempo de expiração do Token, para evitar que a app MVC não consiga pegar o token no cookie para realizar chamadas nas APIs usando o token válido, como acontece na linha 59 da HomeController.cs do projeto MVC.
 
 ### 7. Nota do Desenvolvedor
 Esta é apenas uma aplicação conceito para demonstrar as possíveis formas de implementações do Identity Server em aplicações distribuídas e pode ser utilizada como exemplo de uso para o desenvolvimento de aplicações em diversas arquiteturas.
