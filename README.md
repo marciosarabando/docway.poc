@@ -58,7 +58,7 @@ dotnet run
 ### 6. CONCLUSÃO
 Nesta PoC verificamos que apesar do Token estar dentro da validade padrão de 1 hora ele expira por causa do cookie estar ajustado para expirar com 1 (um) minuto de inatividade (veja a linha 33 da Startup.cs do projeto Docway.MVC).	Portanto, é recomendável que o tempo de expiração do cookie seja ajustado para um tempo maior do que o tempo de expiração do Token, para evitar que a app MVC não consiga pegar o token no cookie para realizar chamadas nas APIs usando o token válido, como acontece na linha 59 da HomeController.cs do projeto MVC.
 
-### 7. NOTA DE DEV
+### 7. NOTA DO DESENVOLVEDOR
 Esta é apenas uma aplicação conceito para demonstrar as possíveis formas de implementações do Identity Server em aplicações distribuídas e pode ser utilizada como exemplo de uso para o desenvolvimento de aplicações em diversas arquiteturas.
 
 ### 8. REFERENCIAS
