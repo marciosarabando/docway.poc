@@ -62,8 +62,8 @@ Nesta PoC verificamos que apesar do Token estar dentro da validade padrão de 1 
 Esta é apenas uma aplicação conceito para demonstrar as possíveis formas de implementações do Identity Server em aplicações distribuídas e pode ser utilizada como exemplo de uso para o desenvolvimento de aplicações em diversas arquiteturas.
 
 ### 8. REFERENCIAS
-https://identityserver4.readthedocs.io/en/latest/
-https://github.com/IdentityServer/IdentityServer4.Templates
+<p>https://identityserver4.readthedocs.io/en/latest/</p>
+<p>https://github.com/IdentityServer/IdentityServer4.Templates</p>
 
 
 
