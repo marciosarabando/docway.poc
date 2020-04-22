@@ -84,11 +84,16 @@ namespace Docway.IDSERVER
 
                     AllowedScopes = { "openid", "profile", "mvc1", "offline_access" },
 
+                    //Access Token Lifetime
+                    AccessTokenLifetime = 7200,
+
                     //Refresh Token Settings
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.ReUse,
                     RefreshTokenExpiration = TokenExpiration.Sliding,
-                    SlidingRefreshTokenLifetime = 60 * 60 * 24 * 365
+                    //SlidingRefreshTokenLifetime = 60 * 60 * 24 * 365
+                    SlidingRefreshTokenLifetime = 120
+                    
                 }
 
             };
